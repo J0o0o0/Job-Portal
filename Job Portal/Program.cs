@@ -1,4 +1,8 @@
 using Job_Portal.Models;
+using Job_Portal.Repository.Implementation;
+using Job_Portal.Repository.Interfaces;
+using Job_Portal.Services.Implementation;
+using Job_Portal.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +16,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(optionsbuilder =>
         optionsbuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddTransient<IApplicationUserRepository, ApplicationUserRepository>();
+builder.Services.AddTransient<IApplicationUserService, ApplicationUserService>();
+builder.Services.AddTransient<IJobRepository, JobRepository>();
+builder.Services.AddTransient<IJobService, JobService>();
+
 
 var app = builder.Build();
 

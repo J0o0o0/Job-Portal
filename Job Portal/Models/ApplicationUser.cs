@@ -6,7 +6,7 @@ namespace Job_Portal.Models
     {
         public string Address { get; set; } = string.Empty;
 
-        byte[]? CV;
+        // CV;
 
 
     }

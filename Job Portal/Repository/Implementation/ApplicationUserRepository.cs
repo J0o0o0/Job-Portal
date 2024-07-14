@@ -40,6 +40,18 @@ namespace Job_Portal.Repository.Implementation
             }
 
         }
+        public ApplicationUser FindById(string id) 
+        {
+            ApplicationUser user = context.ApplicationUsers.Single(x => x.Id.Equals(id));
+            if(user != null)
+            {
+                return user;
+            }
+            else
+            {
+                return null;
+            }
+        }
         public async Task<ApplicationUser> FindByName(string userName)
         {
             ApplicationUser? userModel = await userManager.FindByNameAsync(userName);
