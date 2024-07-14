@@ -42,6 +42,10 @@ namespace Job_Portal.Repository.Implementation
         }
         public ApplicationUser FindById(string id) 
         {
+            if (id == null)
+            {
+                return null;
+            }
             ApplicationUser user = context.ApplicationUsers.Single(x => x.Id.Equals(id));
             if(user != null)
             {
@@ -64,7 +68,7 @@ namespace Job_Portal.Repository.Implementation
             return await userManager.CheckPasswordAsync(user, password);
         }
 
-        public async void SignIn(ApplicationUser user, bool RememberMe)
+        public async Task SignIn(ApplicationUser user, bool RememberMe)
         {
             await signInManager.SignInAsync(user, RememberMe);
         }

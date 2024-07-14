@@ -12,9 +12,9 @@ namespace Job_Portal.Controllers
     [ApiController]
     public class JobController : ControllerBase
     {
-        private readonly JobService jobService;
+        private readonly IJobService jobService;
 
-        public JobController(JobService jobService)
+        public JobController(IJobService jobService)
         {
             this.jobService = jobService;
         }
@@ -23,7 +23,7 @@ namespace Job_Portal.Controllers
         [HttpGet]
         public IActionResult Get()
         {            
-            return Ok(jobService.GetJobs);
+            return Ok(jobService.GetJobs());
         }
 
         [HttpGet("{id:int}")]

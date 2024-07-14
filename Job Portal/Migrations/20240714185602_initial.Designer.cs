@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Job_Portal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240711104706_ini2")]
-    partial class ini2
+    [Migration("20240714185602_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,12 +27,17 @@ namespace Job_Portal.Migrations
 
             modelBuilder.Entity("Job_Portal.Models.Job", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Applicants")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("ClosingDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CompanyId")
                         .IsRequired()
@@ -55,6 +60,9 @@ namespace Job_Portal.Migrations
 
                     b.Property<decimal>("MonthlyPay")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("PostedDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -280,16 +288,9 @@ namespace Job_Portal.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("Job_Portal.Models.Company", b =>
-                {
-                    b.HasBaseType("Job_Portal.Models.ApplicationUser");
-
-                    b.HasDiscriminator().HasValue("Company");
-                });
-
             modelBuilder.Entity("Job_Portal.Models.Job", b =>
                 {
-                    b.HasOne("Job_Portal.Models.Company", "Company")
+                    b.HasOne("Job_Portal.Models.ApplicationUser", "Company")
                         .WithMany()
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)

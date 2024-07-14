@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Job_Portal.Migrations
 {
     /// <inheritdoc />
-    public partial class ini : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -162,14 +162,17 @@ namespace Job_Portal.Migrations
                 name: "Jobs",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CompanyId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     JobCategory = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     JobDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HourPay = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     MonthlyPay = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Applicants = table.Column<int>(type: "int", nullable: false)
+                    Applicants = table.Column<int>(type: "int", nullable: false),
+                    PostedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ClosingDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -7,25 +7,27 @@ namespace Job_Portal.Services.Implementation
 {
     public class JobService : IJobService
     {
-        private readonly IRepositoryManger repositoryManger;
+        private readonly IJobRepository jobRepository;
+        private readonly IApplicationUserRepository applicationUserRepository;
 
-        public JobService(IRepositoryManger repositoryManger)
+        public JobService(IJobRepository jobRepository , IApplicationUserRepository applicationUserRepository)
         {
-            this.repositoryManger = repositoryManger;
+            this.jobRepository = jobRepository;
+            this.applicationUserRepository = applicationUserRepository;
         }
 
         public List<Job> GetJobs()
         {
-            return repositoryManger.JobRepository.GetAll();
+            return jobRepository.GetAll();
         }
-        public Job GetJobById(int? jobId)
+        public Job? GetJobById(int? jobId)
         {
             if(jobId == null)
             {
                 return null;
             }else
             {
-                return repositoryManger.JobRepository.GetById(jobId);
+                return jobRepository.GetById(jobId);
             }
         }
 
@@ -39,9 +41,9 @@ namespace Job_Portal.Services.Implementation
                 job.ClosingDate = model.ClosingDate;
                 job.HourPay = model.HourPay;
                 job.MonthlyPay = model.MonthlyPay;
-                job.Company = repositoryManger.UserRepository.FindById(model.CompanyId);
+                job.Company = applicationUserRepository.FindById(model.CompanyId);
 
-                return repositoryManger.JobRepository.CreatJob(job);
+                return jobRepository.CreatJob(job);
             }else
             {
                 return false; 
@@ -50,7 +52,7 @@ namespace Job_Portal.Services.Implementation
 
         public bool DeleteJob (int id)
         {
-            return repositoryManger.JobRepository.DeleteById(id);
+            return jobRepository.DeleteById(id);
         }
     }
 }

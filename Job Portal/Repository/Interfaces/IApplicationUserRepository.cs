@@ -10,7 +10,7 @@ namespace Job_Portal.Repository.Interfaces
         public ApplicationUser FindById(string id);
         public Task<ApplicationUser> FindByName(string userName);
         public Task<bool> CheckPassword(ApplicationUser user, string password);
-        public void SignIn(ApplicationUser user ,bool RememberMe);
+        public Task SignIn(ApplicationUser user ,bool RememberMe);
         public void SignOut();
 
 

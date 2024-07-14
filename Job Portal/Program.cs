@@ -3,7 +3,9 @@ using Job_Portal.Repository.Implementation;
 using Job_Portal.Repository.Interfaces;
 using Job_Portal.Services.Implementation;
 using Job_Portal.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,10 +19,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(optionsbuilder =>
         optionsbuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddTransient<IApplicationUserRepository, ApplicationUserRepository>();
-builder.Services.AddTransient<IApplicationUserService, ApplicationUserService>();
-builder.Services.AddTransient<IJobRepository, JobRepository>();
-builder.Services.AddTransient<IJobService, JobService>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+                                       options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
+builder.Services.AddScoped<IJobRepository, JobRepository>();
+builder.Services.AddScoped<IJobService, JobService>();
 
 
 var app = builder.Build();

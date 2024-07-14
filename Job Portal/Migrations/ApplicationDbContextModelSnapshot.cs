@@ -24,12 +24,17 @@ namespace Job_Portal.Migrations
 
             modelBuilder.Entity("Job_Portal.Models.Job", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Applicants")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("ClosingDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CompanyId")
                         .IsRequired()
@@ -52,6 +57,9 @@ namespace Job_Portal.Migrations
 
                     b.Property<decimal>("MonthlyPay")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("PostedDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
