@@ -29,5 +29,7 @@ namespace Job_Portal.Models
         [DataType(DataType.Date)]
         public DateTime ClosingDate { get; set; }
 
+        public ICollection<JobApplication> JobApplications { get; set;}
+
     }
 }
