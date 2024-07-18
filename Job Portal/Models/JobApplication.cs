@@ -19,5 +19,13 @@ namespace Job_Portal.Models
 
         public Job Job { get; set; }
         public ApplicationUser User { get; set; }
+
+        public JobStatus Status { get; set; } = JobStatus.Pending;
+    }
+    public enum JobStatus 
+    {
+        Pending,
+        Accepted,
+        Rejected
     }
 }

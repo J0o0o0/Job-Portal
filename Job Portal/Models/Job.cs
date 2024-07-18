@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Job_Portal.Models
 {
@@ -28,7 +29,7 @@ namespace Job_Portal.Models
         [Required]
         [DataType(DataType.Date)]
         public DateTime ClosingDate { get; set; }
-
+        [JsonIgnore]
         public ICollection<JobApplication> JobApplications { get; set;}
 
     }

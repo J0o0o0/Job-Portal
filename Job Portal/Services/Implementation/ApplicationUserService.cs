@@ -18,7 +18,7 @@ namespace Job_Portal.Services.Implementation
 
         public async Task<bool> Register(ApplicationUserViewModel newUser)
         {
-            if (newUser.Role == "Company" || newUser.Role == "JopSeeker")
+            if (newUser.Role == "Company" || newUser.Role == "JobSeeker")
             { 
                 ApplicationUser user = new ApplicationUser();
                 user.UserName = newUser.UserName;

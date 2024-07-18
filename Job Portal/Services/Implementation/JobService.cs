@@ -37,6 +37,7 @@ namespace Job_Portal.Services.Implementation
             {
                 Job job = new Job();
                 job.JobDescription = model.JobDescription;
+                job.JobTitle = model.JobTitle;
                 job.JobCategory = model.JobCategory;
                 job.ClosingDate = model.ClosingDate;
                 job.HourPay = model.HourPay;

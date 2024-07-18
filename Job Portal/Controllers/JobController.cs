@@ -44,6 +44,10 @@ namespace Job_Portal.Controllers
         public IActionResult Post(JobViewModel model) 
         {
             model.CompanyId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if(model == null) 
+            {
+                return BadRequest();
+            }
             if (jobService.CreatJob(model))
             {
                 return Ok();

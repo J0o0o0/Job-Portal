@@ -15,7 +15,7 @@ namespace Job_Portal.Repository.Implementation
         }
         public List<Job> GetAll()
         {
-            return context.Jobs.ToList();
+            return context.Jobs.Where(x => x.ClosingDate > DateTime.Now).ToList();
         }
 
         public Job? GetById(int? id)

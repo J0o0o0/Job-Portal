@@ -27,7 +27,16 @@ namespace Job_Portal.Controllers
 
             if (await applicationUserService.Register(model))
             {
-                
+                    LogInViewModel log = new LogInViewModel
+                    {
+                        RememberMe=true,
+                        UserName = model.UserName,
+                        Password = model.Password
+                    };
+
+                    await applicationUserService.LogIn(log);
+
+
                 return Ok(ModelState);
             }
             else
