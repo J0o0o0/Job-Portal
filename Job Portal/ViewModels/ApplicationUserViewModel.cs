@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Job_Portal.ViewModel
+namespace Job_Portal.ViewModels
 {
 
     public class ApplicationUserViewModel

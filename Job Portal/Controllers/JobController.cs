@@ -2,6 +2,7 @@
 using Job_Portal.Services.Implementation;
 using Job_Portal.Services.Interfaces;
 using Job_Portal.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -41,14 +42,17 @@ namespace Job_Portal.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Company")]
         public IActionResult Post(JobViewModel model) 
         {
-            model.CompanyId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+             
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             if(model == null) 
             {
-                return BadRequest();
+                return BadRequest("please login");
             }
-            if (jobService.CreatJob(model))
+            if (jobService.CreatJob(model, userId ))
             {
                 return Ok();
             }
@@ -58,18 +62,7 @@ namespace Job_Portal.Controllers
             }
 
         }
-        [HttpDelete]
-        public IActionResult Delete(int id) 
-        {
-            if (jobService.DeleteJob(id))
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest();
-            }
-        }
+        
         
     }
 }

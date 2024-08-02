@@ -18,9 +18,11 @@ namespace Job_Portal.Repository.Implementation
             return context.Jobs.Where(x => x.ClosingDate > DateTime.Now).ToList();
         }
 
-        public Job? GetById(int? id)
+        public async Task<Job>? GetById(int? id)
         {
-            var job = context.Jobs.FirstOrDefault(x => x.Id == id);
+            var job = await context.Jobs
+                .Include(j => j.Company) 
+                .FirstOrDefaultAsync(j => j.Id == id);
             if (job == null)
             {
                 return null;

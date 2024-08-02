@@ -1,7 +1,6 @@
 ﻿using Job_Portal.Models;
 using Job_Portal.Repository.Interfaces;
 using Job_Portal.Services.Interfaces;
-using Job_Portal.ViewModel;
 using Job_Portal.ViewModels;
 using Microsoft.AspNetCore.Identity;
 
@@ -68,6 +67,10 @@ namespace Job_Portal.Services.Implementation
         public void LogOut()
         {
             applicationUserRepository.SignOut();
+        }
+        public ApplicationUser FindById(string id)
+        {
+            return applicationUserRepository.FindById(id);
         }
     }
 

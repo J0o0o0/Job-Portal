@@ -8,7 +8,6 @@ namespace Job_Portal.ViewModels
     {
         
         [ForeignKey("CompanyId")]
-        public required string CompanyId { get; set; }
 
         public string JobTitle { get; set; } = string.Empty;
         public string JobCategory { get; set; } = string.Empty;

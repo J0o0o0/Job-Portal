@@ -1,5 +1,4 @@
 ﻿using Job_Portal.Models;
-using Job_Portal.ViewModel;
 using Job_Portal.ViewModels;
 
 namespace Job_Portal.Repository.Interfaces

@@ -65,7 +65,7 @@ namespace Job_Portal.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Jobs");
+                    b.ToTable("Jobs", (string)null);
                 });
 
             modelBuilder.Entity("Job_Portal.Models.JobApplication", b =>
@@ -99,7 +99,7 @@ namespace Job_Portal.Migrations
 
                     b.HasIndex("JobId");
 
-                    b.ToTable("JobApplications");
+                    b.ToTable("JobApplications", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

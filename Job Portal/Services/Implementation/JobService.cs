@@ -20,18 +20,18 @@ namespace Job_Portal.Services.Implementation
         {
             return jobRepository.GetAll();
         }
-        public Job? GetJobById(int? jobId)
+        public async Task<Job>? GetJobById(int? jobId)
         {
             if(jobId == null)
             {
                 return null;
             }else
             {
-                return jobRepository.GetById(jobId);
+                return await jobRepository.GetById(jobId);
             }
         }
 
-        public bool CreatJob (JobViewModel model)
+        public bool CreatJob (JobViewModel model, string userId)
         {
             if (model != null) 
             {
@@ -42,7 +42,8 @@ namespace Job_Portal.Services.Implementation
                 job.ClosingDate = model.ClosingDate;
                 job.HourPay = model.HourPay;
                 job.MonthlyPay = model.MonthlyPay;
-                job.Company = applicationUserRepository.FindById(model.CompanyId);
+                job.CompanyId = userId;
+                job.Company = applicationUserRepository.FindById(userId);
 
                 return jobRepository.CreatJob(job);
             }else

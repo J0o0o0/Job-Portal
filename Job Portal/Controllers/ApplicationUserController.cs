@@ -1,5 +1,4 @@
 ﻿using Job_Portal.Services.Interfaces;
-using Job_Portal.ViewModel;
 using Job_Portal.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
